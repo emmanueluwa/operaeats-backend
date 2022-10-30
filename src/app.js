@@ -16,6 +16,8 @@ app.use(express.json());
 //type accepted
 app.use(express.json({ type: 'application/vnd.api+json' }));
 app.use(express.urlencoded({ extended: true }));
+//allowing access to images in browser
+app.use('/uploads', express.static('uploads'));
 
 
 //logging in
