@@ -3,6 +3,7 @@ const cors = require('cors');
 
 const userRoute = require('./routes/user.routes');
 const authRoute = require('./routes/auth.routes');
+const groupRoute = require('./routes/group.routes');
 
 const cookieSession = require('cookie-session');
 
@@ -32,7 +33,7 @@ app.use(
 //routes
 app.use('/api/', userRoute);
 app.use('/api/', authRoute);
-
+app.use('/api/', groupRoute);
 
 
 module.exports = app;
