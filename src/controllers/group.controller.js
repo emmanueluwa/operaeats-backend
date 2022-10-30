@@ -25,7 +25,7 @@ const getAllGroups = async (req, res) => {
 }
 
 
-//deleting sector
+//deleting group
 const deleteGroup = async (req, res) => {
   try {
     const { group_id } = req.params;
@@ -36,9 +36,23 @@ const deleteGroup = async (req, res) => {
   }
 }
 
+
+//editing group
+const editGroup = async (req, res) => {
+  try {
+    const { group_id } = req.params;
+    const body = { ...req.body, image: req.file.filename };
+    const editedGroup = await groupService.editGroup(group_id, body);
+    return res.status(200).json({ message: `Group edited successfully`, editedGroup })
+  } catch (err) {
+    return res.status(400).json({ error: err.message })
+  }
+}
+
 //exporting module
 module.exports = {
   createGroup,
   getAllGroups,
-  deleteGroup
+  deleteGroup,
+  editGroup
 };

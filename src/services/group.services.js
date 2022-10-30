@@ -33,8 +33,28 @@ const deleteGroup = async (id) => {
   return deletedGroup.rows[0];
 }
 
+
+//editing a group
+const editGroup = async (id, body) => {
+  const { rows } = await db.query('SELECT * FROM "groups" WHERE id = $1', [id]);
+  if (!rows[0]) {
+    throw new Error('Group does not exist');
+  }
+
+  //editing group
+  const { name, image } = body;
+  //change name from rows to edited group
+  const { rows: editedGroup } = await db.query(
+    'UPDATE "groups" SET name = $1, image = $2 WHERE id = $3 RETURNING *',
+    [name, image, id]
+  );
+
+  return editedGroup[0];
+}
+
 module.exports = {
   createGroup,
   getAllGroups,
-  deleteGroup
+  deleteGroup,
+  editGroup
 }
