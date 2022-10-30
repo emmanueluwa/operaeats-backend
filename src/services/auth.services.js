@@ -29,6 +29,19 @@ const loginUser = async (body) => {
   return token;
 };
 
+
+//getting active user
+const activeUser = async (token) => {
+  //decoding token
+  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+  //getting user that matches token from db
+  const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [decodedToken.id]);
+
+  return rows[0];
+}
+
 module.exports = {
   loginUser,
+  activeUser
 }
