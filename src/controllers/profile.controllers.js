@@ -12,6 +12,20 @@ const createProfile = async (req, res) => {
   }
 }
 
+
+//  editing profile
+const editProfile = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const body = req.body;
+    const editedProfile = await profileServices.updateProfile(user_id, body);
+    res.status(200).send({ message: 'Profile updated successfully', editedProfile });
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
+}
+
 module.exports = {
   createProfile,
+  editProfile
 }

@@ -19,6 +19,26 @@ const createProfile = async (body) => {
   return createProfile.rows[0];
 }
 
+
+//updating a profile
+const updateProfile = async (id, body) => {
+  const { location_title, age, eat_type, experience, group_id } = body;
+
+  //checking user profile exists
+  const { rows } = await db.query('SELECT * FROM "profiles" WHERE id = $1', [id]);
+  if (!rows[0]) {
+    throw new Error('Invalid id')
+  }
+
+  const { rows: updateProfile } = await db.query(
+    'UPDATE "profiles" SET location_title = $1, age = $2, eat_type = $3, experience = $4, group_id = $5 WHERE id = $6 RETURNING *',
+    [location_title, age, eat_type, experience, group_id, id]
+  );
+
+  return updateProfile[0];
+}
+
 module.exports = {
   createProfile,
+  updateProfile
 }
