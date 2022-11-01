@@ -27,7 +27,7 @@ const auth = async (req, res, next) => {
       throw new Error('User not found');
     }
 
-    //Attaching user to request
+    //Attaching user to request, allows us to access req.user elsewhere
     req.user = rows[0];
 
     //continuing to next middleware
