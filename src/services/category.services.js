@@ -2,11 +2,11 @@ const db = require('../config/database');
 
 // creating category
 const createCategory = async (body) => {
-  const { name, sector_id } = body;
+  const { name, group_id } = body;
 
   const { rows } = await db.query(
-    'INSERT INTO categories (name, sector_id) VALUES ($1, $2) RETURNING *',
-    [name, sector_id]
+    'INSERT INTO categories (name, group_id) VALUES ($1, $2) RETURNING *',
+    [name, group_id]
   );
 
   return rows[0];
@@ -23,11 +23,11 @@ const getAllCategories = async () => {
 
 //editing category
 const editCategory = async (body, id) => {
-  const { name, sector_id } = body;
+  const { name, group_id } = body;
 
   const { rows } = await db.query(
-    'UPDATE categories SET name = $1, sector_id = $2 WHERE id = $3 RETURNING *',
-    [name, sector_id, id]
+    'UPDATE categories SET name = $1, group_id = $2 WHERE id = $3 RETURNING *',
+    [name, group_id, id]
   );
 
   return rows[0];
