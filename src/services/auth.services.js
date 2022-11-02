@@ -36,7 +36,15 @@ const activeUser = async (token) => {
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
   //getting user that matches token from db
-  const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [decodedToken.id]);
+  const { rows } = await db.query(
+    `SELECT users.id, users.name, users.email, 
+    json_agg(profiles.*) AS profile 
+    FROM users 
+    JOIN profiles ON users.id = profiles.user_id
+    WHERE users.id = $1
+    GROUP BY users.id`,
+
+    [decodedToken.id]);
 
   return rows[0];
 }
