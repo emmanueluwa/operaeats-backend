@@ -5,6 +5,7 @@ const userRoute = require('./routes/user.routes');
 const authRoute = require('./routes/auth.routes');
 const groupRoute = require('./routes/group.routes');
 const profileRoute = require('./routes/profile.routes');
+const categoryRoute = require('./routes/category.routes');
 
 const cookieSession = require('cookie-session');
 
@@ -38,6 +39,7 @@ app.use('/api/', userRoute);
 app.use('/api/', authRoute);
 app.use('/api/', groupRoute);
 app.use('/api/', profileRoute);
+app.use('/api/', categoryRoute);
 
 
 module.exports = app;
