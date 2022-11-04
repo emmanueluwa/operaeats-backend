@@ -43,6 +43,7 @@ const editCategory = async (id, body) => {
 const deleteCategory = async (id) => {
   // checking category exists
   const { rows } = await db.query('SELECT * FROM "categories" WHERE id = $1', [id]);
+
   if (!rows[0]) {
     throw new Error(`Category does not exist`);
   }

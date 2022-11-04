@@ -41,7 +41,7 @@ const deleteOrigin = async (req, res) => {
   try {
     const { origin_id } = req.params;
     const deletedOrigin = await originServices.deleteOrigin(origin_id);
-    res.status(202).send({ message: 'origin deleted', deletedOrigin });
+    res.status(200).send({ message: 'origin deleted', deletedOrigin });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }

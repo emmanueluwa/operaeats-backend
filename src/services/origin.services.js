@@ -38,12 +38,19 @@ const editOrigin = async (id, body) => {
 
 //deleting an origin
 const deleteOrigin = async (id) => {
-  const { rows } = db.query(
-    'DELETE FROM origins WHERE id = $1 RETURNING *',
+  //checking origin exists in db
+  const { rows } = await db.query('SELECT * FROM "origins" WHERE id = $1', [id]);
+
+  if (!rows[0]) {
+    throw new Error('Origin does not exist');
+  }
+
+  const { rows: deletedOrigin } = await db.query(
+    'DELETE FROM "origins" WHERE id = $1 RETURNING *',
     [id]
   );
 
-  return rows[0];
+  return deletedOrigin[0];
 }
 
 module.exports = {

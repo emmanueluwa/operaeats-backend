@@ -6,6 +6,7 @@ const authRoute = require('./routes/auth.routes');
 const groupRoute = require('./routes/group.routes');
 const profileRoute = require('./routes/profile.routes');
 const categoryRoute = require('./routes/category.routes');
+const originRoute = require('./routes/origin.routes');
 
 const cookieSession = require('cookie-session');
 
@@ -40,6 +41,7 @@ app.use('/api/', authRoute);
 app.use('/api/', groupRoute);
 app.use('/api/', profileRoute);
 app.use('/api/', categoryRoute);
+app.use('/api/', originRoute);
 
 
 module.exports = app;
